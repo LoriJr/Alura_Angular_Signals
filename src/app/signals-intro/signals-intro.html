@@ -1,3 +1,21 @@
 <div>
-<h1>Introdução</h1>
+  <h2>Elementos Químicos</h2>
+  <ul>
+    @for(elemento of elementos; track elemento.simbolo){
+      <li
+        (click)="selecionarElemento(elemento)"
+        [class.selected] = "elementoSelecionado() === elemento">
+
+        {{ elemento.nome }} ({{ elemento.simbolo }})
+      </li>
+    } @empty {
+      <li>Nenhum elemento na tabela periódica.</li>
+    }
+  </ul>
+
+  <p *ngIf="elementoSelecionado()">
+    Sinal Gravável - Elemento Selecionado: {{ elementoSelecionado()?.nome }}
+  </p>
+
+  <p>Sinal Computado - Informações Detalhadas: {{ elementoInfo() }}</p>
 </div>

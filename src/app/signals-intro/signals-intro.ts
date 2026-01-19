@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, computed, signal } from '@angular/core';
 
 interface Elemento{
   nome: string;
@@ -8,7 +9,7 @@ interface Elemento{
 
 @Component({
   selector: 'app-signals-intro',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './signals-intro.html',
   styleUrl: './signals-intro.css',
 })
@@ -29,4 +30,11 @@ export class SignalsIntro {
   selecionarElemento(elemento: Elemento){
     this.elementoSelecionado.set(elemento);
   }
+
+  elementoInfo = computed(()=> {
+    const elemento = this.elementoSelecionado();
+    return elemento
+    ? `Nome: ${elemento.nome}, Símbolo: ${elemento.simbolo}, Número de Massa: ${elemento.numeroMassa} `
+    : 'Nenhum elemento selecionado'
+  })
 }
